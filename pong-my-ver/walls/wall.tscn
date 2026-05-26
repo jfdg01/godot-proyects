@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b1dwcc1p45fy7"]
+
+[ext_resource type="Script" uid="uid://cydfo287vujcf" path="res://walls/wall.gd" id="1_mcqr0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mcqr0"]
+distance = -16.0
+
+[node name="Wall" type="StaticBody2D" unique_id=55314892]
+script = ExtResource("1_mcqr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=687403462]
+position = Vector2(0, -16)
+rotation = 6.2831855
+shape = SubResource("WorldBoundaryShape2D_mcqr0")
