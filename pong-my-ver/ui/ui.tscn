@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dnff84o4us7yg"]
+
+[node name="Ui" type="Control" unique_id=1353607551]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Right" type="Label" parent="." unique_id=443077990]
+layout_mode = 0
+offset_left = 1664.0
+offset_right = 1852.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 2
+
+[node name="Left" type="Label" parent="." unique_id=2093903728]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 60

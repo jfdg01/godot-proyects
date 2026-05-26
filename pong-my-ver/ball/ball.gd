@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal scored(who)
+
 const SPEED: float = 700.0
 var RNG: float = randf()
 var screen_w: int
@@ -21,10 +23,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if position.x < 0:
-		print("score dcha")
+		scored.emit("right")
 		reset()
 	if position.x > screen_w:
-		print("score izda")
+		scored.emit("left")
 		reset()
 
 func _physics_process(delta: float) -> void:
