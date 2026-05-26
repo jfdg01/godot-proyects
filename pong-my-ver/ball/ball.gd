@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Ball
+
 signal scored(who)
 
 const SPEED: float = 700.0
