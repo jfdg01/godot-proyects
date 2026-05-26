@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1dwcc1p45fy7"]
 
-[ext_resource type="Script" uid="uid://cydfo287vujcf" path="res://walls/wall.gd" id="1_mcqr0"]
+[ext_resource type="Script" uid="uid://cydfo287vujcf" path="res://level/walls/wall.gd" id="1_mcqr0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mcqr0"]
 distance = -16.0
