@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c074y71uvdnfe"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1962109175]
+
+[node name="Control" type="Control" parent="." unique_id=826233354]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control" unique_id=1645503233]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Left: 10"
+
+[node name="Label2" type="Label" parent="Control" unique_id=394764555]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 1.0
+offset_right = 340.0
+offset_bottom = 24.0
+text = "Right: 10"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3

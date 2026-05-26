@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dv1uuf8ekm2l5"]
+
+[ext_resource type="PackedScene" uid="uid://bxevymji3t5c0" path="res://Ball/ball.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dvo8qc6y3y1ly" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cv6r2wbfv4e8f" path="res://Paddle/paddle.tscn" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://04b33rbg2jc0" path="res://Paddle/ai_paddle.gd" id="4_1bvp3"]
+
+[node name="Level" type="Node2D" unique_id=1051097435 node_paths=PackedStringArray("ball", "label_p1", "label_p2")]
+script = ExtResource("1_1bvp3")
+ball = NodePath("Ball")
+label_p1 = NodePath("CanvasLayer/Control2/LabelP1")
+label_p2 = NodePath("CanvasLayer/Control2/LabelP2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1679981658]
+clip_contents = true
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(8.496865, 5.5955625)
+size_flags_horizontal = 8
+color = Color(0.1672, 0.38, 0.37290668, 1)
+
+[node name="Ball" parent="." unique_id=1906444198 instance=ExtResource("1_0xm2m")]
+position = Vector2(168, 112)
+
+[node name="PlayerPaddle" parent="." unique_id=392358900 instance=ExtResource("2_h2yge")]
+position = Vector2(18, 112)
+
+[node name="AIPaddle" parent="." unique_id=883003433 node_paths=PackedStringArray("ball") instance=ExtResource("2_h2yge")]
+position = Vector2(320, 112)
+script = ExtResource("4_1bvp3")
+speed = 400.0
+up_action = "p2-up"
+down_action = "p2-down"
+ball = NodePath("../Ball")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=808405718]
+
+[node name="Control2" type="Control" parent="CanvasLayer" unique_id=1892270896]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="LabelP1" type="Label" parent="CanvasLayer/Control2" unique_id=1384027440]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Left: 10"
+metadata/_edit_use_anchors_ = true
+
+[node name="LabelP2" type="Label" parent="CanvasLayer/Control2" unique_id=1757320836]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 1.0
+offset_right = 340.0
+offset_bottom = 24.0
+text = "Right: 10"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
