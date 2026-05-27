@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://h0flgh6fpw14"]
+[gd_scene format=3 uid="uid://rba5wcgjenv2"]
 
-[ext_resource type="Script" uid="uid://bvfw3ncyw40md" path="res://level/paddle/player-paddle.gd" id="1_wmxf4"]
+[ext_resource type="Script" uid="uid://bvfw3ncyw40md" path="res://level/paddle/player-paddle.gd" id="1_3uarr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywfuc"]
 size = Vector2(96, 368)
 
 [node name="Paddle" type="CharacterBody2D" unique_id=1104553487]
-script = ExtResource("1_wmxf4")
+script = ExtResource("1_3uarr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1147485949]
 shape = SubResource("RectangleShape2D_ywfuc")

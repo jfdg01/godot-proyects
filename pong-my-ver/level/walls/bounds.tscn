@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dyy2h3i1p2l0e"]
+
+[ext_resource type="PackedScene" uid="uid://b1dwcc1p45fy7" path="res://level/walls/wall.tscn" id="1_jrdlg"]
+
+[node name="Bounds" type="Node2D" unique_id=31053414]
+
+[node name="TopLeft-DOWN" parent="." unique_id=55314892 instance=ExtResource("1_jrdlg")]
+rotation = -3.1415927
+collision_mask = 0
+
+[node name="TopLeft-RIGHT" parent="." unique_id=1950907628 instance=ExtResource("1_jrdlg")]
+rotation = 1.5707964
+
+[node name="BottomRight-UP" parent="." unique_id=589370548 instance=ExtResource("1_jrdlg")]
+position = Vector2(1920, 1080)
+
+[node name="BottomRight-LEFT" parent="." unique_id=1893865205 instance=ExtResource("1_jrdlg")]
+position = Vector2(1920, 1080)
+rotation = -1.5707964

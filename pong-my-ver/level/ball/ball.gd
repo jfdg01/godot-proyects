@@ -12,15 +12,16 @@ var radius: int
 
 func reset():
 	var angle: float = randf() * TAU
-	position.x = screen_w / 2
-	position.y = screen_h / 2
-	velocity.x = -SPEED
+	position.x = screen_w / 2 + randf()
+	position.y = screen_h / 2 + randf()
+	velocity.x = -SPEED if randf() > 0.5 else SPEED
 	velocity.y = randf_range(-0.5, 0.5) * SPEED
 
 func _ready() -> void:
 	radius = $CollisionShape2D.shape.radius
 	screen_w = get_viewport_rect().size.x
 	screen_h = get_viewport_rect().size.y
+	add_to_group("balls")
 	reset();
 
 func _process(delta: float) -> void:
@@ -35,10 +36,20 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset"):
 		reset()
 	var collision = move_and_collide(velocity * delta)
-	
+
 	if collision:
-		if collision.get_collider().is_in_group("paddles"):
-			velocity = velocity.bounce(collision.get_normal())
-			velocity *= 1.05
-		if collision.get_collider().is_in_group("walls"):
-			velocity = velocity.bounce(Vector2(0,1))
+		var normal = collision.get_normal()
+		var collider = collision.get_collider()
+		
+		if collider.is_in_group("balls"):
+			var other_ball = collider as Ball
+			var relative_velocity = velocity - other_ball.velocity
+			var impulse = relative_velocity.dot(normal)
+			if impulse < 0:
+				velocity -= impulse * normal
+				other_ball.velocity += impulse * normal
+		
+		else: 
+			velocity = velocity.bounce(normal)
+			if collider.is_in_group("paddles"):
+				velocity *= 1.05
