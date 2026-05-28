@@ -1,7 +1,6 @@
 extends Node2D
 
 var SPEED = 500
-		
 @onready var width = $Area2D/CollisionShape2D.shape.size.x/2
 		
 func _physics_process(delta: float) -> void:
@@ -12,6 +11,8 @@ func _physics_process(delta: float) -> void:
 	
 func _ready() -> void:
 	$Area2D.body_entered.connect(_on_body_entered)
+	$Area
+	$NinePatchRect.size.y *= 2
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("bird"):

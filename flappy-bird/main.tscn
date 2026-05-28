@@ -9,7 +9,7 @@
 script = ExtResource("1_h2yge")
 
 [node name="Pipe" parent="." unique_id=1293999553 instance=ExtResource("4_1bvp3")]
-position = Vector2(432, 304)
+position = Vector2(751.99994, 408)
 
 [node name="Floor" parent="." unique_id=191192053 instance=ExtResource("3_h2yge")]
 position = Vector2(0, 680)
