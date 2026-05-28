@@ -10,10 +10,12 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		
 	if velocity.y < 0:
-		rotation = lerp(rotation, -0.5, 30 * delta)
+		# rotation = lerp(rotation, -0.5, 30 * delta)
+		rotation_degrees = lerp(rotation_degrees, -30.0, 0.2)
 	elif velocity.y > 0:
-		rotation = lerp(rotation, 0.5, 10 * delta)
+		rotation_degrees = lerp(rotation_degrees, 30.0, 0.2)
 	else:
-		rotation = lerp(rotation, 0.0, 10 * delta)
+		# rotation = lerp(rotation, 0.0, 10 * delta)
+		pass
 	
 	move_and_slide()
