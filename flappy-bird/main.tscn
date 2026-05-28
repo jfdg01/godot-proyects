@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://df5kcbay64u2d"]
+
+[ext_resource type="PackedScene" uid="uid://dvogfxhyaptnj" path="res://bird/bird.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dvc68n1cuoh1w" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dvep2r4xdjc4q" path="res://floor/floor.tscn" id="3_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=583278869]
+script = ExtResource("1_h2yge")
+
+[node name="Bird" parent="." unique_id=2004885248 instance=ExtResource("1_0xm2m")]
+position = Vector2(234, 317)
+
+[node name="Floor" parent="." unique_id=191192053 instance=ExtResource("3_h2yge")]
+position = Vector2(0, 696)
