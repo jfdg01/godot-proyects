@@ -1,10 +1,7 @@
 extends Node2D
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	Events.touched_something.connect(_on_touched_floor)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_touched_floor(message: String) -> void:
+	print(message)

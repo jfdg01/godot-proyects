@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dwiurugv8r65t" path="res://floor/floor.gd" id="1_1wsjq"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1bvp3"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1wsjq"]
 
-[node name="Floor" type="StaticBody2D" unique_id=191192053]
+[node name="Floor" type="Area2D" unique_id=1293999553]
 script = ExtResource("1_1wsjq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1791838237]
-shape = SubResource("WorldBoundaryShape2D_1bvp3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1836139893]
+shape = SubResource("WorldBoundaryShape2D_1wsjq")

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dhplw851g6xu7"]
+
+[ext_resource type="Script" uid="uid://deocsr0gsg5fd" path="res://pipe/pipe.gd" id="1_yxxyv"]
+[ext_resource type="Texture2D" path="res://bird/flappy-bird-logo.png" id="2_hxrpf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lf31"]
+size = Vector2(115, 258)
+
+[node name="Node2D" type="Node2D" unique_id=1783944043]
+script = ExtResource("1_yxxyv")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=994384363]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1986794896]
+position = Vector2(0, 109)
+shape = SubResource("RectangleShape2D_6lf31")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=328637280]
+position = Vector2(1.1368684e-13, 113)
+scale = Vector2(0.45319426, 0.9519626)
+texture = ExtResource("2_hxrpf")
+region_enabled = true
+region_rect = Rect2(328, 184, 256, 280)
