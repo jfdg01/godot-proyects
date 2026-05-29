@@ -10,12 +10,18 @@ size = Vector2(40, 40)
 script = ExtResource("1_hxrpf")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=887438631]
+custom_minimum_size = Vector2(32, 32)
 offset_left = -20.0
 offset_top = -20.0
-offset_right = 20.0
+offset_right = 21.0
 offset_bottom = 20.0
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("2_hxrpf")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 5
+patch_margin_top = 16
+patch_margin_right = 12
+patch_margin_bottom = 15
 
 [node name="Area2D" type="Area2D" parent="." unique_id=877422222]
 
