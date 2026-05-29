@@ -8,11 +8,11 @@
 [node name="Main" type="Node2D" unique_id=583278869]
 script = ExtResource("1_h2yge")
 
-[node name="Pipe" parent="." unique_id=1293999553 instance=ExtResource("4_1bvp3")]
-position = Vector2(751.99994, 408)
-
 [node name="Floor" parent="." unique_id=191192053 instance=ExtResource("3_h2yge")]
 position = Vector2(0, 680)
 
 [node name="Bird" parent="." unique_id=2004885248 instance=ExtResource("1_0xm2m")]
 position = Vector2(234, 317)
+
+[node name="Pipe" parent="." unique_id=1876232358 instance=ExtResource("4_1bvp3")]
+position = Vector2(1272, 487.99997)

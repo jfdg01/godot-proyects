@@ -1,34 +1,23 @@
 [gd_scene format=3 uid="uid://dhplw851g6xu7"]
 
+[ext_resource type="Script" uid="uid://c78v3axarxoda" path="res://pipe/pipe.gd" id="1_hxrpf"]
 [ext_resource type="Texture2D" uid="uid://uwwll67bc1uj" path="res://pipe/pipe.png" id="2_hxrpf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lf31"]
-size = Vector2(34, 37)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxrpf"]
+size = Vector2(40, 40)
 
-[node name="NinePatchRect" type="NinePatchRect" unique_id=954235559]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -17.0
-offset_top = -18.5
-offset_right = 17.0
-offset_bottom = 18.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Pipe" type="Node2D" unique_id=1876232358]
+script = ExtResource("1_hxrpf")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=887438631]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(20, 20)
 texture = ExtResource("2_hxrpf")
-region_rect = Rect2(0, 0, 32, 37)
-patch_margin_left = 14
-patch_margin_top = 16
-patch_margin_right = 20
-patch_margin_bottom = 21
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1451095253]
-position = Vector2(16.999998, 17.499998)
-scale = Vector2(0.99999994, 0.99999994)
+[node name="Area2D" type="Area2D" parent="." unique_id=877422222]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1688904743]
-position = Vector2(0, 1.5)
-shape = SubResource("RectangleShape2D_6lf31")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=88682176]
+shape = SubResource("RectangleShape2D_hxrpf")
