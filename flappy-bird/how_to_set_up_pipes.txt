@@ -1,0 +1,108 @@
+Good context — I can see exactly where the confusion is coming from. Let me explain the
+  Godot-first way of thinking about this, and why it'll feel cleaner than what you've got.
+
+  The core idea: a pipe pair is one scene, not two pipes glued together in main
+
+  Right now main.gd is doing a lot of reaching into the pipe
+  (pipe.get_node("Area2D/CollisionShape2D"), nine_patch.size.y = screen_h, flipping scale.y
+  to fake the top pipe). That's the part fighting you. In Godot the guiding principle is:
+
+  ▎ Each scene owns its own layout and behavior. Outsiders talk to it through a small,
+  ▎ clean interface — they don't rearrange its insides.
+
+  So the question isn't "how do I spawn two pipes and position them" — it's "what is the
+  thing I'm spawning?" In Flappy Bird the thing is a pipe pair: a top pipe, a bottom pipe,
+  and a gap between them, all moving left together as a unit. That should be a single
+  scene.
+
+  Recommended structure (composition)
+
+  You keep your existing pipe.tscn as the single pipe (the visual + collision). Then you
+  build a new scene on top of it:
+
+  PipePair (Node2D)            ← script lives here, moves left, handles cleanup
+  ├── TopPipe (instance of pipe.tscn)     ← flipped to point down
+  ├── BottomPipe (instance of pipe.tscn)  ← normal, points up
+  ├── ScoreArea (Area2D)        ← optional: the gap, for counting points
+  └── VisibleOnScreenNotifier2D ← tells the pair when it's left the screen
+
+  The trick that makes the math disappear: position the children once, in the editor,
+  relative to the pair's origin. Treat the PipePair's origin as the center of the gap.
+
+  - The bottom pipe sits a little below origin (its top edge at +gap/2), extending down
+  off-screen.
+  - The top pipe sits a little above origin (its bottom edge at -gap/2), extending up
+  off-screen, visually flipped.
+
+  Once that's set up in the editor, you never recompute per-pipe positions in code again.
+
+  What moves to where (the responsibility shift)
+
+  ┌────────────────┬────────────────────────┬─────────────────────────────────────────┐
+  │    Concern     │         Today          │            Godot-first home             │
+  ├────────────────┼────────────────────────┼─────────────────────────────────────────┤
+  │ Moving left    │ pipe.gd                │ PipePair.gd — move the pair, both pipes │
+  │                │ _physics_process       │  follow for free                        │
+  ├────────────────┼────────────────────────┼─────────────────────────────────────────┤
+  │ Top vs bottom  │ main.gd (scale.y = -3, │ baked into PipePair.tscn in the editor  │
+  │ layout         │  pos_y+gap)            │                                         │
+  ├────────────────┼────────────────────────┼─────────────────────────────────────────┤
+  │ Pipe height /  │ main.gd sets           │ pipe.gd exposes its own height;         │
+  │ stretching     │ nine_patch.size.y      │ NinePatchRect is already the right tool │
+  ├────────────────┼────────────────────────┼─────────────────────────────────────────┤
+  │ Where the gap  │ scattered math in      │ main just sets pair.position.y =        │
+  │ is             │ main.gd                │ some_random_y                           │
+  ├────────────────┼────────────────────────┼─────────────────────────────────────────┤
+  │ Cleanup        │ nothing yet (pipes     │ VisibleOnScreenNotifier2D →             │
+  │ off-screen     │ pile up forever)       │ queue_free() in PipePair.gd             │
+  └────────────────┴────────────────────────┴─────────────────────────────────────────┘
+
+  So main's job shrinks to almost nothing:
+
+  var pair = PipePairScene.instantiate()
+  pair.position = Vector2(screen_w, randf_range(top_limit, bottom_limit))
+  add_child(pair)
+
+  That's the whole spawn. No get_node into internals, no scale flipping, no
+  nine_patch.size.y. All the messy knowledge lives inside the scene that owns it.
+  That's the whole spawn. No get_node into internals, no scale flipping, no
+  nine_patch.size.y. All the messy knowledge lives inside the scene that owns it.
+
+  A few Godot-first details worth knowing
+
+  1. Use @export to expose a clean interface. If you want a configurable gap, put @export 
+  var gap_size: float on PipePair.gd and let it position its two children in _ready(). Now
+  the gap is a knob you can see and tweak in the Inspector — that's very Godot. The outside
+  world sets intent (gap_size, position.y), never raw child geometry.
+
+  2. Spawn from a Timer, not from _physics_process + input. Your current spawn-on-keypress
+  is a fine debugging tool, but the real game uses a Timer node with wait_time set,
+  autostart on, and its timeout signal connected to your spawn function. Timers are nodes
+  you configure in the editor — reach for them instead of counting delta yourself.
+
+  3. Clean up off-screen pipes. Add a VisibleOnScreenNotifier2D to the pair and connect its
+  screen_exited signal to queue_free(). Otherwise every pipe you've ever spawned keeps
+  living and moving forever, off to the left.
+
+  4. Don't flip with negative scale. Negative scale.y works visually but it silently
+  inverts collision shapes and child coordinate systems, which causes confusing bugs later.
+  For the top pipe prefer flip_v on a Sprite, or rotation = PI (180°) on that pipe
+  instance, or just author a NinePatchRect that grows upward. Set it once in the editor on
+  TopPipe.
+
+  5. Scoring is its own Area2D in the gap. The empty space between the pipes gets an Area2D
+  (your ScoreArea). When the bird's body enters it, +1 point. This is why making the pair
+  a real scene pays off — the gap becomes a thing you can attach behavior to.
+
+  The mental model to take away
+
+  You had it inside-out: main was the brain micromanaging dumb pipes. Flip it — make the 
+  pipe pair a smart, self-contained scene that knows how to lay itself out, move, score,
+  and clean up. Then main becomes a dumb spawner that just drops pairs at the right edge at
+  a random height on a timer.
+
+  Want me to walk through building the PipePair.tscn node by node in the editor, or sketch
+  what PipePair.gd's interface (@exports + _ready layout) would look like so you can write
+  it yourself?
+
+✻ Cogitated for 55s
