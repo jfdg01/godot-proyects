@@ -1,89 +1,25 @@
-[gd_scene format=3 uid="uid://dhplw851g6xu7"]
+[gd_scene format=3 uid="uid://x5gqmshcp3vs"]
 
-[ext_resource type="Script" uid="uid://c78v3axarxoda" path="res://pipe/pipe.gd" id="1_hxrpf"]
-[ext_resource type="Script" uid="uid://cecnvy4rp78h3" path="res://pipe/small.gd" id="2_hxrpf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_48ms7"]
-size = Vector2(32, 54)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxrpf"]
-size = Vector2(32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hxrpf"]
-load_path = "res://.godot/imported/pipe.png-80f733633b353d0ba8d87150e894dcfd.ctex"
+[ext_resource type="Script" uid="uid://de6teod247o0t" path="res://pipe/pipe.gd" id="1_hxrpf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxxyv"]
-size = Vector2(32, 32)
 
-[node name="Pipe" type="Node2D" unique_id=1876232358]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48ms7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxrpf"]
+
+[node name="Pipe" type="Node2D" unique_id=1228628237]
 script = ExtResource("1_hxrpf")
-gap_size = 180.0
 
-[node name="Gap" type="Area2D" parent="." unique_id=2124766242]
-position = Vector2(0, 300)
+[node name="Body" type="Area2D" parent="." unique_id=415695896]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gap" unique_id=1395244559]
-shape = SubResource("RectangleShape2D_48ms7")
-
-[node name="PipeTop" type="Area2D" parent="." unique_id=303735239]
-position = Vector2(0, 232)
-rotation = -3.1415925
-script = ExtResource("2_hxrpf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeTop" unique_id=557949860]
-shape = SubResource("RectangleShape2D_hxrpf")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="PipeTop" unique_id=347706861]
-custom_minimum_size = Vector2(32, 32)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture = SubResource("CompressedTexture2D_hxrpf")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 5
-patch_margin_top = 16
-patch_margin_right = 12
-patch_margin_bottom = 15
-metadata/_edit_use_anchors_ = true
-
-[node name="PipeBottom" type="Area2D" parent="." unique_id=320414115]
-position = Vector2(0, 368)
-script = ExtResource("2_hxrpf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeBottom" unique_id=1450075472]
+[node name="TopCollShape" type="CollisionShape2D" parent="Body" unique_id=1436774630]
 shape = SubResource("RectangleShape2D_yxxyv")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PipeBottom" unique_id=264824892]
-custom_minimum_size = Vector2(32, 32)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture = SubResource("CompressedTexture2D_hxrpf")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 5
-patch_margin_top = 16
-patch_margin_right = 12
-patch_margin_bottom = 15
-metadata/_edit_use_anchors_ = true
+[node name="BotCollShape" type="CollisionShape2D" parent="Body" unique_id=2116043656]
+shape = SubResource("RectangleShape2D_48ms7")
+
+[node name="Gap" type="Area2D" parent="." unique_id=1686955736]
+
+[node name="GapCollShape" type="CollisionShape2D" parent="Gap" unique_id=2042699356]
+shape = SubResource("RectangleShape2D_hxrpf")

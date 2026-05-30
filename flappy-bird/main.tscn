@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dvogfxhyaptnj" path="res://bird/bird.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dvc68n1cuoh1w" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dvep2r4xdjc4q" path="res://floor/floor.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dhplw851g6xu7" path="res://pipe/pipe.tscn" id="4_1bvp3"]
 
 [node name="Main" type="Node2D" unique_id=583278869]
 script = ExtResource("1_h2yge")
@@ -13,5 +12,3 @@ position = Vector2(0, 680)
 
 [node name="Bird" parent="." unique_id=2004885248 instance=ExtResource("1_0xm2m")]
 position = Vector2(234, 317)
-
-[node name="Pipe" parent="." unique_id=1876232358 instance=ExtResource("4_1bvp3")]

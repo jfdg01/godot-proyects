@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dhplw851g6xu7"]
+
+[ext_resource type="Script" uid="uid://de6teod247o0t" path="res://pipe/pipe.gd" id="1_hxrpf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lf31"]
+size = Vector2(70, 158.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxxyv"]
+size = Vector2(70, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxrpf"]
+size = Vector2(70, 20)
+
+[node name="Pipe" type="Area2D" unique_id=2126311408]
+script = ExtResource("1_hxrpf")
+
+[node name="top" type="CollisionShape2D" parent="." unique_id=928323733]
+position = Vector2(400, 79.25)
+shape = SubResource("RectangleShape2D_6lf31")
+debug_color = Color(0.8210386, 0.35395053, 0.50735706, 0.41960785)
+
+[node name="gap" type="CollisionShape2D" parent="." unique_id=1464439717]
+position = Vector2(400, 400)
+shape = SubResource("RectangleShape2D_yxxyv")
+
+[node name="bot" type="CollisionShape2D" parent="." unique_id=928649152]
+position = Vector2(420, 420)
+shape = SubResource("RectangleShape2D_hxrpf")

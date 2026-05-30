@@ -1,3 +1,3 @@
 extends Node
 
-signal touched_something(message: String)
+# signal touched_something(message: String)

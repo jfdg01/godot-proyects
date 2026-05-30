@@ -1,49 +1,41 @@
-@tool
 extends Node2D
 
-@export var gap_center: float = 300.0:
-	set(v): gap_center = v; _sync()
-@export var gap_size: float = 150.0:
-	set(v): gap_size = v; _sync()
-@export var pipe_width: float = 128.0:
-	set(v): pipe_width = v; _sync()
+var screen_h: float
+var gap_size: float = 300
+var gap_position: Vector2 = Vector2(400,500)
 
-# Called when the node enters the scene tree for the first time.
+func start() -> void:
+	screen_h = get_viewport_rect().size.y
+
 func _ready() -> void:
-	_sync()
-
-func top() -> Area2D:
-	return get_node_or_null("PipeTop") as Area2D
-
-func bottom() -> Area2D:
-	return get_node_or_null("PipeBottom") as Area2D
+	start()
+	calculate_pipes(gap_position, gap_size)
 	
-func gap() -> Area2D:
-	return get_node_or_null("Gap") as Area2D
+func calculate_pipes(gap_pos: Vector2, gap_size: float):
+	var gap_coll: CollisionShape2D = get_node("Gap/GapCollShape")
+	var gap_rect: RectangleShape2D = gap_coll.shape
+	gap_coll.position = gap_pos
+	gap_rect.size.y = gap_size
+	calculate_top(gap_coll.position, gap_rect.size.y)
+	calculate_bot(gap_coll.position, gap_rect.size.y)
 
-func _pipes_ready() -> bool:
-	return bottom() != null and gap() != null and top() != null
-
-func _sync() -> void:
-	if not _pipes_ready():
-		return
-	print("Ready")
-	var screen_h := get_viewport_rect().size.y
-	var top_h := gap_center - gap_size / 2.0
-	var bot_h := gap_center + gap_size / 2.0
+func calculate_top(gap_pos: Vector2, gap_size: float):
+	var top_coll: CollisionShape2D = get_node("Body/TopCollShape")
+	var top_rect: RectangleShape2D = top_coll.shape
+	var top_h = gap_pos.y - gap_size / 2
+	var top_y = top_h / 2
+	var top_x = gap_pos.x
+	top_coll.position = Vector2(top_x, top_y)
+	top_rect.size.y = abs(top_h)
 	
-	(gap().get_node("CollisionShape2D").shape as RectangleShape2D).size.y = gap_size
-	gap().position.y = gap_center
-	top().position.y = top_h + top().size.y
-	bottom().position.y = bot_h - bottom().size.y
-	# top().size.y = 300
-	# bottom().size.y = 300
-
-	# _get_bottom().size = Vector2(pipe_width, screen_h - bot_h)
-	#_get_bottom().position = Vector2(0.0, gap_center + gap_size / 2.0 + bot_h / 2.0)
+func calculate_bot(gap_pos: Vector2, gap_size: float):
+	var bot_coll: CollisionShape2D = get_node("Body/BotCollShape")
+	var bot_rect: RectangleShape2D = bot_coll.shape
+	var bot_h = screen_h - gap_pos.y - (gap_size / 2)
+	var bot_y = screen_h - (bot_h / 2)
+	var bot_x = gap_pos.x
+	bot_coll.position = Vector2(bot_x, bot_y)
+	bot_rect.size.y = abs(bot_h)
 
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		return
-	position.x -= 400 * delta
 	pass
