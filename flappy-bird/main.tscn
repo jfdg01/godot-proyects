@@ -15,4 +15,3 @@ position = Vector2(0, 680)
 position = Vector2(234, 317)
 
 [node name="Pipe" parent="." unique_id=1876232358 instance=ExtResource("4_1bvp3")]
-position = Vector2(1272, 487.99997)

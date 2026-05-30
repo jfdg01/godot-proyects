@@ -19,27 +19,6 @@ func _physics_process(_delta: float) -> void:
 		spawn_pipe(pos_y,gap)
 	
 func spawn_pipe(pos_y: float, gap: float):
-	spawn_bottom_pipe(pos_y, gap)
-	spawn_top_pipe(pos_y, gap)
-	
-func spawn_bottom_pipe(pos_y: float, gap: float):
 	var pipe = PipeScene.instantiate()
-	var area = pipe.get_node("Area2D/CollisionShape2D")
-	var nine_patch = pipe.get_node("NinePatchRect")
-	var pipe_y = area.shape.size.y
-	var pipe_x = area.shape.size.x
-	pipe.position = Vector2(screen_w + pipe_x, pos_y + gap)
-	nine_patch.size.y = screen_h
-	pipe.scale = Vector2(3.0,3.0) # normal if below middle line
-	add_child(pipe)
-	
-func spawn_top_pipe(pos_y: float, gap: float):
-	var pipe = PipeScene.instantiate()
-	var area = pipe.get_node("Area2D/CollisionShape2D")
-	var nine_patch = pipe.get_node("NinePatchRect")
-	var pipe_y = area.shape.size.y
-	var pipe_x = area.shape.size.x
-	pipe.position = Vector2(screen_w - pipe_x, pos_y + gap)
-	nine_patch.size.y = screen_h
-	pipe.scale = Vector2(3.0,-3.0) # rotated 180 deg
+	pipe.position.x = screen_w + pipe.size
 	add_child(pipe)

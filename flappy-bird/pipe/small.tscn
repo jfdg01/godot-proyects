@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ymb3b1cxwupj"]
+
+[ext_resource type="Script" uid="uid://cecnvy4rp78h3" path="res://pipe/small.gd" id="1_dma8k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ehbn"]
+size = Vector2(32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3ehbn"]
+load_path = "res://.godot/imported/pipe.png-80f733633b353d0ba8d87150e894dcfd.ctex"
+
+[node name="Pipe" type="Area2D" unique_id=1469775721]
+script = ExtResource("1_dma8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=14714589]
+shape = SubResource("RectangleShape2D_3ehbn")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1434088543]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = SubResource("CompressedTexture2D_3ehbn")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 5
+patch_margin_top = 16
+patch_margin_right = 12
+patch_margin_bottom = 15
